@@ -1,8 +1,11 @@
 const mongoose =require('mongoose');
-const express = require('express');
+var alias = '/nd';
+module.exports = function(app){
 
+    app.get(alias + '/test', function(req, res){
+        res.send('test');
+    });
 
-var app = express();
 mongoose.connect('mongodb://localhost/LibraryDB')
     .then(()=> console.log('connected'))
     .catch(err=>console.error('err'))
@@ -58,10 +61,9 @@ app.get('/listBooks', (req, res) => {
           })
     }
     getBooks();
-    
+
 });
 
 
 
-app.listen(3000);
-
+}
