@@ -2,6 +2,12 @@ const mongoose =require('mongoose');
 var alias = '/nd';
 module.exports = function(app){
 
+
+    app.get(alias + '/libCount', function(req, res){
+        var count={"count1":"100","count2":"50","count3":"65","count4":"99"}
+        res.send(count);
+    });
+
     app.get(alias + '/test', function(req, res){
         res.send('test');
     });
