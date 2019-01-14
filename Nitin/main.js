@@ -7,6 +7,10 @@ module.exports = function(app){
         var count={"count1":"100","count2":"50","count3":"65","count4":"99"}
         res.send(count);
     });
+    app.get(alias + '/notifyCount', function(req, res){
+        var count={"notifications":"3"}
+        res.send(count);
+    });
 
     app.get(alias + '/test', function(req, res){
         res.send('test');
