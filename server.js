@@ -32,7 +32,7 @@ user.on('connection', (socket) => {
     var current = new Date(); //'Mar 11 2015' current.getTime() = 1426060964567
     var followingDay = new Date(current.getTime() + 604800000); // + 1 day in ms
     console.log(data);
-    out = {
+    out : {
       regID : data.regID,
       bName : "Lean Startup",
       aName : "Eric Ries",
