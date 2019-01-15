@@ -35,7 +35,7 @@ admin.on('connection', function(socket){
     };
     var regid = data.regID;
     checkPost = checkPost.filter(function(regid) {
-        return item !== value
+        return regid !== value
     });
     console.log(data);
     user.to(data.regID).emit('responseIssueBook', out);
@@ -69,9 +69,3 @@ user.on('connection', (socket) => {
 });
 
 server.listen(port);
-
-//
-// out ={
-//   regID : "C2k16105436",
-//   code : 200
-// }
