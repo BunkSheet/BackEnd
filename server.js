@@ -36,6 +36,7 @@ user.on('connection', (socket) => {
       regID : data.regID,
       bName : "Lean Startup",
       aName : "Eric Ries",
+      ban : data.ban,
       date : followingDay.toLocaleDateString()
     }
     socket.join(data.regID);
