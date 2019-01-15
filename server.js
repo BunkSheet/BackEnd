@@ -42,10 +42,10 @@ user.on('connection', (socket) => {
     socket.join(data.regID);
     setTimeout(function () {
       var outData = {
-        rcode : 3004
+        rcode : 501
       }
       user.to(data.regID).emit('responseIssueBook', outData);
-    }, 60000);
+    }, 120000);
     admin.to('adminRoom').emit('requestIssueBookApproval', out);
   });
 });
