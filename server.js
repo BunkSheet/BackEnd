@@ -13,14 +13,30 @@ require('./Nitin/main')(app);
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 //socket area
+function testEqual(arr, obj) {
+    for(var i=0; i<arr.length; i++) {
+        if (arr[i] == obj) return true;
+    }
+    return false;
+}
+
+
+
+
+
+
 
 var admin = io.of('/admin');
 admin.on('connection', function(socket){
   socket.join('adminRoom');
   socket.on('responseIssueBookApproval', function(data){
-    var out = [{
+    var out = {
       rcode : data.rcode
-    }];
+    };
+    var regid = data.regID;
+    checkPost = checkPost.filter(function(regid) {
+        return item !== value
+    });
     console.log(data);
     user.to(data.regID).emit('responseIssueBook', out);
   });
@@ -40,11 +56,13 @@ user.on('connection', (socket) => {
       date : followingDay.toLocaleDateString()
     }
     socket.join(data.regID);
+    checkPost.push(data.regID);
     setTimeout(function () {
       var outData = {
         rcode : 501
       }
-      user.to(data.regID).emit('responseIssueBook', outData);
+      if(testEqual(checkPost, data.regID)){
+      user.to(data.regID).emit('responseIssueBook', outData);}
     }, 1*60*1000);
     admin.to('adminRoom').emit('requestIssueBookApproval', out);
   });
