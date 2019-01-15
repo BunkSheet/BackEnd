@@ -1,6 +1,6 @@
 const express = require('express');
 port = process.env.PORT || 3000 ;
-var checkPost = [];
+// var checkPost = [];
 var app = express();
 var hbs  = require('hbs');
 app.set('view engine', 'hbs');
@@ -13,16 +13,16 @@ require('./Nitin/main')(app);
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 //socket area
-function testEqual(arr, obj) {
-    for(var i=0; i<arr.length; i++) {
-        if (arr[i] == obj) return true;
-    }
-    return false;
-}
-
-
-
-
+// function testEqual(arr, obj) {
+//     for(var i=0; i<arr.length; i++) {
+//         if (arr[i] == obj) return true;
+//     }
+//     return false;
+// }
+//
+//
+//
+//
 
 
 
@@ -33,11 +33,11 @@ admin.on('connection', function(socket){
     var out = [{
       rcode : data.rcode
     }];
-    var regid = data.regID;
-    checkPost = checkPost.filter(function(regid) {
-        return regid !== value
-    });
-    console.log(data);
+    // var regid = data.regID;
+    // checkPost = checkPost.filter(function(regid) {
+    //     return regid !== value
+    // });
+    // console.log(data);
     user.to(data.regID).emit('responseIssueBook', out);
   });
 });
@@ -56,12 +56,12 @@ user.on('connection', (socket) => {
       date : followingDay.toLocaleDateString()
     }
     socket.join(data.regID);
-    checkPost.push(data.regID);
+    // checkPost.push(data.regID);
     setTimeout(function () {
       var outData = [{
         rcode : 501
       }];
-      if(testEqual(checkPost, data.regID)){
+      // if(testEqual(checkPost, data.regID)){
       user.to(data.regID).emit('responseIssueBook', outData);}
     }, 1*60*1000);
     admin.to('adminRoom').emit('requestIssueBookApproval', out);
