@@ -18,7 +18,7 @@ var admin = io.of('/admin');
 admin.on('connection', function(socket){
   socket.join('adminRoom');
   socket.on('responseIssueBookApproval', function(data){
-    out : {
+    var out = {
       rcode : data.rcode
     }
     console.log(data);
@@ -32,7 +32,7 @@ user.on('connection', (socket) => {
     var current = new Date(); //'Mar 11 2015' current.getTime() = 1426060964567
     var followingDay = new Date(current.getTime() + 604800000); // + 1 day in ms
     console.log(data);
-    out : {
+    var out = {
       regID : data.regID,
       bName : "Lean Startup",
       aName : "Eric Ries",
