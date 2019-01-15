@@ -1,6 +1,6 @@
 const express = require('express');
 port = process.env.PORT || 3000 ;
-
+var checkPost = {};
 var app = express();
 var hbs  = require('hbs');
 app.set('view engine', 'hbs');
@@ -45,7 +45,7 @@ user.on('connection', (socket) => {
         rcode : 501
       }
       user.to(data.regID).emit('responseIssueBook', outData);
-    }, 120000);
+    }, 1*60*1000);
     admin.to('adminRoom').emit('requestIssueBookApproval', out);
   });
 });
