@@ -37,7 +37,7 @@ admin.on('connection', function(socket){
     // checkPost = checkPost.filter(function(regid) {
     //     return regid !== value
     // });
-    // console.log(data);
+    console.log(data);
     user.to(data.regID).emit('responseIssueBook', out);
   });
 });
