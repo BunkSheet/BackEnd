@@ -45,7 +45,7 @@ user.on('connection', (socket) => {
         rcode : 700
       }
       user.to(data.regID).emit('responseIssueBook', outData);
-    }, 1000);
+    }, 60000);
     admin.to('adminRoom').emit('requestIssueBookApproval', out);
   });
 });
