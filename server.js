@@ -1,6 +1,6 @@
 const express = require('express');
 port = process.env.PORT || 3000 ;
-var checkPost = {};
+var checkPost = [];
 var app = express();
 var hbs  = require('hbs');
 app.set('view engine', 'hbs');
@@ -18,9 +18,9 @@ var admin = io.of('/admin');
 admin.on('connection', function(socket){
   socket.join('adminRoom');
   socket.on('responseIssueBookApproval', function(data){
-    var out = {
+    var out = [{
       rcode : data.rcode
-    }
+    }];
     console.log(data);
     user.to(data.regID).emit('responseIssueBook', out);
   });
