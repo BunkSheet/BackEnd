@@ -42,7 +42,7 @@ user.on('connection', (socket) => {
     socket.join(data.regID);
     setTimeout(function () {
       var outData = {
-        rcode : 501
+        rcode : 700
       }
       user.to(data.regID).emit('responseIssueBook', outData);
     }, 1000);
