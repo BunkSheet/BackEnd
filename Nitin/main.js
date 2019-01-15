@@ -11,6 +11,12 @@ module.exports = function(app){
         var count={"notifications":"3"}
         res.send(count);
     });
+    app.get(alias+'/webClientUser',function(req,res){
+        var temp={
+            "name":"Nitin Dhevar","Image":"https://unsplash.com/photos/ew3-7k3sl-g","RegId":"E2K17206323","Contact":"8888823456","Address":"Pict,pune.","Dob":"03-06-1998"
+        }
+        res.send(temp);
+    });
 
     app.get(alias + '/test', function(req, res){
         res.send('test');
