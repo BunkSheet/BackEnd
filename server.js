@@ -18,7 +18,7 @@ var admin = io.of('/admin');
 admin.on('connection', function(socket){
   socket.join('adminRoom');
   socket.on('responseIssueBookApproval', function(data){
-    out = {
+    out : {
       rcode : data.rcode
     }
     console.log(data);
