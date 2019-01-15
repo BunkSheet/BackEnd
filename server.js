@@ -40,6 +40,12 @@ user.on('connection', (socket) => {
       date : followingDay.toLocaleDateString()
     }
     socket.join(data.regID);
+    setTimeout(function () {
+      var outData = {
+        rcode : 501
+      }
+      user.to(data.regID).emit('responseIssueBook', outData);
+    }, 1000);
     admin.to('adminRoom').emit('requestIssueBookApproval', out);
   });
 });
