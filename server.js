@@ -63,7 +63,7 @@ user.on('connection', (socket) => {
       }];
       // if(testEqual(checkPost, data.regID)){
       user.to(data.regID).emit('responseIssueBook', outData);
-    }, 1*60*1000);
+    }, 1*1000);
     admin.to('adminRoom').emit('requestIssueBookApproval', out);
   });
 });
