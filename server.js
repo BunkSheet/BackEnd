@@ -59,11 +59,11 @@ user.on('connection', (socket) => {
     // checkPost.push(data.regID);
     setTimeout(function () {
       var outData = {
-        rcode : 501
+        rcode : 600
       };
       // if(testEqual(checkPost, data.regID)){
       user.to(data.regID).emit('responseIssueBook', outData);
-    }, 1*1000);
+    }, 1*60*1000);
     admin.to('adminRoom').emit('requestIssueBookApproval', out);
   });
 });
