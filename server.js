@@ -59,7 +59,7 @@ user.on('connection', (socket) => {
     // checkPost.push(data.regID);
     setTimeout(function () {
       var outData = {
-        rcode : 200
+        rcode : 600
       };
       // if(testEqual(checkPost, data.regID)){
       console.log(outData.rcode);
