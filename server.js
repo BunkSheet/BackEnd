@@ -62,6 +62,7 @@ user.on('connection', (socket) => {
         rcode : 600
       };
       // if(testEqual(checkPost, data.regID)){
+      console.log(outData.rcode);
       user.to(data.regID).emit('responseIssueBook', outData);
     }, 1*60*1000);
     admin.to('adminRoom').emit('requestIssueBookApproval', out);
