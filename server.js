@@ -47,7 +47,7 @@ user.on('connection', (socket) => {
   socket.on('requestIssueBook', function(data){
     var current = new Date(); //'Mar 11 2015' current.getTime() = 1426060964567
     var followingDay = new Date(current.getTime() + 604800000); // + 1 day in ms
-    console.log(JSON.parse(data));
+    console.log(JSON.stringify(data));
     var out = {
       regID : data.regID,
       bName : "Lean Startup",
