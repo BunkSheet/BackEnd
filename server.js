@@ -30,9 +30,9 @@ var admin = io.of('/admin');
 admin.on('connection', function(socket){
   socket.join('adminRoom');
   socket.on('responseIssueBookApproval', function(data){
-    var out = [{
+    var out = {
       rcode : data.rcode
-    }];
+    };
     // var regid = data.regID;
     // checkPost = checkPost.filter(function(regid) {
     //     return regid !== value
@@ -58,9 +58,9 @@ user.on('connection', (socket) => {
     socket.join(data.regID);
     // checkPost.push(data.regID);
     setTimeout(function () {
-      var outData = [{
+      var outData = {
         rcode : 501
-      }];
+      };
       // if(testEqual(checkPost, data.regID)){
       user.to(data.regID).emit('responseIssueBook', outData);
     }, 1*1000);
