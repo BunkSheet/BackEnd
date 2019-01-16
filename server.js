@@ -25,7 +25,6 @@ var io = require('socket.io')(server);
 //
 
 
-
 var admin = io.of('/admin');
 admin.on('connection', function(socket){
   socket.join('adminRoom');
@@ -47,7 +46,7 @@ user.on('connection', (socket) => {
   socket.on('requestIssueBook', function(data){
     var current = new Date(); //'Mar 11 2015' current.getTime() = 1426060964567
     var followingDay = new Date(current.getTime() + 604800000); // + 1 day in ms
-    console.log(JSON.stringify(data));
+    console.log(data);
     var out = {
       regID : data.regID,
       bName : "Lean Startup",
@@ -64,7 +63,7 @@ user.on('connection', (socket) => {
       // if(testEqual(checkPost, data.regID)){
       console.log(outData.rcode);
       user.to(data.regID).emit('responseIssueBook', outData);
-    }, 1*1000);
+    }, 1*60*1000);
     admin.to('adminRoom').emit('requestIssueBookApproval', out);
   });
 });
