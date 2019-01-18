@@ -26,6 +26,34 @@ mongoose.connect('mongodb://localhost/LibraryDB')
     .then(()=> console.log('connected'))
     .catch(err=>console.error('err'))
 
+    app.get(alias+'/pushNotification',function(req,res){
+        var temp={
+            "title":"Library Notice","body":"There is an seminar organised by central library in february!","Image":"https://unsplash.com/photos/ew3-7k3sl-g","Id":"ND12345678",
+            "time":"Date.now()"
+        }
+        res.send(temp);
+
+    });
+
+    var title,body,imageLink,Id;
+    app.get(alias+'/postNotifications',function(req,res){
+        title=req.title;
+        body=req.body;
+        imageLink=req.imageLink;
+        Id=req.Id;
+    });
+
+
+    app.get(alias+'/delNotification',function(req,res){
+        var tempId=req.Id;
+        if(Id==tempId){
+            title=null;
+            body=null;
+            imageLink=null;
+            Id=null;
+        }
+    });
+
 
 const bookSchema=new mongoose.Schema({
     ISBN : String,
