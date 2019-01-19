@@ -19,6 +19,7 @@
   "homepage": "https://github.com/BunkSheet/BackEnd#readme",
   "dependencies": {
     "csvtojson": "^2.0.8",
+    "expo-server-sdk": "^3.1.0",
     "express": "^4.16.4",
     "hbs": "^4.0.1",
     "level": "^4.0.0",
