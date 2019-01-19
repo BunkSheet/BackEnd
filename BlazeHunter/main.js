@@ -4,6 +4,7 @@ const multer = require('multer');
 const expoN = require(process.cwd() + '/notify.js');
 const bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+const {User}  = require(process.cwd() + '/models/user');
 var url = "mongodb://dbuser:Dbuser123@ds161134.mlab.com:61134/bunksheet";
 //var url = 'mongodb://localhost:27017/LibraryDB';
 mongoose.connect(url)
