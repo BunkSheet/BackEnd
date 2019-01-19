@@ -49,9 +49,13 @@ module.exports = function(app){
             timestamp:new Date().valueOf()
         });
         console.log(newnotice);
-
+        notice = {
+          title : req.body.title,
+          body:req.body.nbody,
+        }
         newnotice.save().then((doc)=>{
             console.log(doc);
+            sendNoticeToUser(notice);
             res.send(doc);
         },(err)=>{
             console.log(process.cwd());
@@ -61,4 +65,17 @@ module.exports = function(app){
         })
 
     });
+
+    function sendNoticeToUser(notice){
+      (async () => {
+        tokens = []
+        User.find({},(error, users) => {
+          for (let user of users) {
+            tokens.push(user.expoToken);
+          }
+          console.log(tokens);
+          expoN.sendNotifiaction(tokens,notice);
+        })
+      })();
+    }
 }
