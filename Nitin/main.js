@@ -1,5 +1,7 @@
 const mongoose =require('mongoose');
+var mongodb = require('mongodb');
 var alias = '/nd';
+// root url https://mighty-hollows-23016.herokuapp.com/
 module.exports = function(app){
 
 
@@ -39,6 +41,31 @@ mongoose.connect('mongodb://localhost/LibraryDB')
         res.send(temp);
 
     });
+
+    // var MongoClient = mongodb.MongoClient;
+    // var url = 'mongodb://dbuser:Dbuser123@ds161134.mlab.com:61134/bunksheet'; 
+    // MongoClient.connect(url, function (err, db) {
+    //     if (err) {
+    //       console.log('Unable to connect to the mongoDB server. Error:', err);
+    //     } else {
+    //       console.log('Connection established to', url); 
+    //       var temp=db.find();
+    //       console.log(db);
+    //     }
+    //   });  
+    var Mongoose=require("mongoose");
+    var dbURI='mongodb://dbuser:Dbuser123@ds161134.mlab.com:61134/bunksheet';
+    Mongoose.connect(dbURI,function(err){    
+        if(err){
+        console.log('Some problem with the connection ' +err)   
+        } 
+        else {
+        console.log('The Mongoose connection is ready')  ;
+        var temp=books.find();
+        console.log(temp);
+        }
+    
+    })
 
     var title,body,imageLink,Id;
     app.post(alias+'/postNotifications',function(req,res){
