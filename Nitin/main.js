@@ -39,7 +39,7 @@ mongoose.connect('mongodb://localhost/LibraryDB')
     });
 
     var title,body,imageLink,Id;
-    app.get(alias+'/postNotifications',function(req,res){
+    app.post(alias+'/postNotifications',function(req,res){
         title=req.title;
         body=req.body;
         imageLink=req.imageLink;
@@ -47,7 +47,7 @@ mongoose.connect('mongodb://localhost/LibraryDB')
     });
 
 
-    app.get(alias+'/delNotification',function(req,res){
+    app.post(alias+'/delNotification',function(req,res){
         var tempId=req.Id;
         if(Id==tempId){
             title=null;
