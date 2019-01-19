@@ -28,11 +28,13 @@ mongoose.connect('mongodb://localhost/LibraryDB')
 
     app.get(alias+'/pushNotification',function(req,res){
         var temp=[{
-            "title":"Library Notice","body":"There is an seminar organised by central library in february!","Image":"https://unsplash.com/photos/ew3-7k3sl-g","Id":"ND12345678",
-            "time":Date.now()
+            "title":"Library Notice","body":"There is an seminar organised by central library in february!","Image":"http://books.google.com/books/content?id=r9x-OXdzpPcC&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+            ,"Id":"ND12345678",
+            "time":Date(Date.now()).toString()
         },{
-            "title":"Notice","body":"Tommorow is an holiday!","Image":"https://unsplash.com/photos/ew3-7k3sl-g","Id":"ND12345678",
-            "time":"20-01-2018"
+            "title":"Notice","body":"Tommorow is an holiday!","Image":"http://books.google.com/books/content?id=gvg5OtC0CJ8C&printsec=frontcover&img=1&zoom=2&edge=curl&imgtk=AFLRE71PrCV7rQlMkwtvOZ_wKm0b9YbVduAVyRnHsObu3vY3WQQVqdPYujfmw_aroQ7xJRaJD64zW07P-CnmHnEUCGPFkHYtluzlgE8L7D4RcpDJbqz1nqjXAGFCOvSesiyQ9qEM6b_K&source=gbs_api",
+            "Id":"ND12345679",
+            "time":Date(Date.now()).toString()
         }]
         res.send(temp);
 
