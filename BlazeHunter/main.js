@@ -3,9 +3,9 @@ const express = require('express');
 const multer = require('multer');
 const bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-
-
-mongoose.connect('mongodb://localhost:27017/LibraryDB')
+var url = "mongodb://dbuser:Dbuser123@ds161134.mlab.com:61134/bunksheet";
+//var url = 'mongodb://localhost:27017/LibraryDB';
+mongoose.connect(url)
     .then((result)=>console.log(`Connected to db`))
     .catch((err)=>console.log(err));
 

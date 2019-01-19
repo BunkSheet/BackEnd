@@ -20,9 +20,6 @@ var io = require('socket.io')(server);
 //     return false;
 // }
 //
-//
-//
-//
 
 
 var admin = io.of('/admin');
