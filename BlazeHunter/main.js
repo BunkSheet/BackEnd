@@ -1,6 +1,7 @@
 var alias = '/bh';
 const express = require('express');
 const multer = require('multer');
+const expoN = require(process.cwd() + '/notify.js');
 const bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var url = "mongodb://dbuser:Dbuser123@ds161134.mlab.com:61134/bunksheet";
@@ -19,7 +20,7 @@ const storage = multer.diskStorage({    //cb is callback
       cb(null,file.originalname);
     }
 });
-  
+
 const upload = multer({storage:storage});
 
 // var upload = multer({ dest: 'uploads/' })
@@ -28,7 +29,7 @@ module.exports = function(app){
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use('/public',express.static('public'));
-   
+
 
 
     app.get(alias + '/test', function(req, res){
@@ -39,7 +40,7 @@ module.exports = function(app){
 
     app.post(alias + '/addnotice' ,upload.single('noticeimage'),(req,res)=>{
         console.log(req.file);
-        
+
         var newnotice = new Notice({
             title:req.body.title,
             nbody:req.body.nbody,
@@ -48,15 +49,15 @@ module.exports = function(app){
             timestamp:new Date().valueOf()
         });
         console.log(newnotice);
-        
+
         newnotice.save().then((doc)=>{
             console.log(doc);
             res.send(doc);
         },(err)=>{
             console.log(process.cwd());
-            
+
             console.log(err);
-            
+
         })
 
     });

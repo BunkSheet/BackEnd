@@ -34,6 +34,8 @@ module.exports = function(app){
     });
 
 
-
+    app.get(alias + '/sendToAll', (req, res) => {
+        res.send('test');
+    });
 
 }
