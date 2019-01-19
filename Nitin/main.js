@@ -27,10 +27,13 @@ mongoose.connect('mongodb://localhost/LibraryDB')
     .catch(err=>console.error('err'))
 
     app.get(alias+'/pushNotification',function(req,res){
-        var temp={
+        var temp=[{
             "title":"Library Notice","body":"There is an seminar organised by central library in february!","Image":"https://unsplash.com/photos/ew3-7k3sl-g","Id":"ND12345678",
-            "time":"Date.now()"
-        }
+            "time":Date.now()
+        },{
+            "title":"Notice","body":"Tommorow is an holiday!","Image":"https://unsplash.com/photos/ew3-7k3sl-g","Id":"ND12345678",
+            "time":"20-01-2018"
+        }]
         res.send(temp);
 
     });
