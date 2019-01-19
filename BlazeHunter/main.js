@@ -4,6 +4,7 @@ const multer = require('multer');
 const expoN = require(process.cwd() + '/notify.js');
 const bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+const {User}  = require(process.cwd() + '/models/user');
 var url = "mongodb://dbuser:Dbuser123@ds161134.mlab.com:61134/bunksheet";
 //var url = 'mongodb://localhost:27017/LibraryDB';
 mongoose.connect(url)
@@ -49,9 +50,13 @@ module.exports = function(app){
             timestamp:new Date().valueOf()
         });
         console.log(newnotice);
-
+        notice = {
+          title : req.body.title,
+          body:req.body.nbody,
+        }
         newnotice.save().then((doc)=>{
             console.log(doc);
+            sendNoticeToUser(notice);
             res.send(doc);
         },(err)=>{
             console.log(process.cwd());
@@ -61,4 +66,17 @@ module.exports = function(app){
         })
 
     });
+
+    function sendNoticeToUser(notice){
+      (async () => {
+        tokens = []
+        User.find({},(error, users) => {
+          for (let user of users) {
+            tokens.push(user.expoToken);
+          }
+          console.log(tokens);
+          expoN.sendNotifiaction(tokens,notice);
+        })
+      })();
+    }
 }

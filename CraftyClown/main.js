@@ -35,7 +35,17 @@ module.exports = function(app){
 
 
     app.get(alias + '/sendToAll', (req, res) => {
-        res.send('test');
+      (async () => {
+        tokens = []
+        User.find({},(error, users) => {
+          for (let user of users) {
+            tokens.push(user.expoToken);
+          }
+          console.log(tokens);
+        })
+      })();
+
+        res.send('All The send');
     });
 
 }
