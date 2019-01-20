@@ -2,6 +2,8 @@ const mongoose =require('mongoose');
 var mongodb = require('mongodb');
 const {Books}  = require(process.cwd() + '/models/books');
 const {Book}  = require(process.cwd() + '/models/booksDetails');
+//const Books = require(process.cwd() + '/models/books');
+
 const bodyParser = require('body-parser');
 var alias = '/nd';
 const axios = require('axios');
@@ -56,6 +58,8 @@ module.exports = function(app){
     //       var temp=db.find();
     //       console.log(db);
     //     }
+    //   });
+// var url = "mongodb://dbuser:Dbuser123@ds161134.mlab.com:61134/bunksheet";
     //   });
 var url = "mongodb://dbuser:Dbuser123@ds161134.mlab.com:61134/bunksheet";
 
