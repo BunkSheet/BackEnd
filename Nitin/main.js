@@ -27,9 +27,9 @@ module.exports = function(app){
         res.send('test');
     });
 
-mongoose.connect('mongodb://localhost/LibraryDB')
-    .then(()=> console.log('connected'))
-    .catch(err=>console.error('err'))
+// mongoose.connect('mongodb://localhost/LibraryDB')
+//     .then(()=> console.log('connected'))
+//     .catch(err=>console.error('err'))
 
     app.get(alias+'/pushNotification',function(req,res){
         var temp=[{
@@ -46,16 +46,16 @@ mongoose.connect('mongodb://localhost/LibraryDB')
     });
 
     // var MongoClient = mongodb.MongoClient;
-    // var url = 'mongodb://dbuser:Dbuser123@ds161134.mlab.com:61134/bunksheet'; 
+    // var url = 'mongodb://dbuser:Dbuser123@ds161134.mlab.com:61134/bunksheet';
     // MongoClient.connect(url, function (err, db) {
     //     if (err) {
     //       console.log('Unable to connect to the mongoDB server. Error:', err);
     //     } else {
-    //       console.log('Connection established to', url); 
+    //       console.log('Connection established to', url);
     //       var temp=db.find();
     //       console.log(db);
     //     }
-    //   });  
+    //   });
 var url = "mongodb://dbuser:Dbuser123@ds161134.mlab.com:61134/bunksheet";
 
 mongoose.connect(url)
@@ -80,19 +80,20 @@ mongoose.connect(url)
                     // console.log(response.data.url);
                     // console.log(response.data.explanation);
                      newBook = new Books(response.json);
+                     newBook.save()
                      })
                   .catch(error => {
                    console.log(error);
                     });
-            async function createBook(){
-            const result= await newBook.save();
-            console.log(result);
-        }
-        createBook();
+            // async function createBook(){
+            // const result= await newBook.save();
+            // console.log(result);
+        //}
+        //createBook();
+        res.send("All Done");
 
-        
     });
-   
+
 
 
     app.post(alias+'/postNotifications',function(req,res){
