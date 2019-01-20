@@ -2,6 +2,7 @@ const mongoose =require('mongoose');
 var mongodb = require('mongodb');
 const bodyParser = require('body-parser');
 var alias = '/nd';
+const axios = require('axios');
 // root url https://mighty-hollows-23016.herokuapp.com/
 module.exports = function(app){
 
@@ -72,10 +73,17 @@ mongoose.connect(url)
         var tempIsbn=req.body.Isbn;
         var tempAcNo=req.body.AcNo;
         var tempselfLink=req.body.selfLink;
-        async function createBook(){
-            app.get(tempselfLink, function(req, res){
-                var newBook = new Books(req);
-            });
+        var newBook;
+            axios.get(tempselfLink)
+                .then(response => {
+                    console.log(response.data.url);
+                    console.log(response.data.explanation);
+                     newBook = new Books(response.json);
+                     })
+                  .catch(error => {
+                   console.log(error);
+                    });
+            async function createBook(){
             const result= await newBook.save();
             console.log(result);
         }
