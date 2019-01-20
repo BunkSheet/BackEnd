@@ -65,9 +65,19 @@ mongoose.connect(url)
 
 
 
-    var title,body,imageLink,Id;
+    //var title,body,imageLink,Id;
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
+    app.post(alias + '/addBook',(req,res)=>{
+        var tempIsbn=req.Isbn;
+        var tempAcNo=req.AcNo;
+        var tempselfLink=req.selfLink;
+
+        // app.get(tempselfLink, function(req, res){
+        //    console.log(req);
+       // });
+
+
     app.post(alias+'/postNotifications',function(req,res){
         title=req.title;
         body=req.body;
