@@ -1,6 +1,6 @@
 const mongoose =require('mongoose');
 var mongodb = require('mongodb');
-const Books = require('/models/books');
+const {Books}  = require(process.cwd() + '/models/books');
 const bodyParser = require('body-parser');
 var alias = '/nd';
 const axios = require('axios');
@@ -74,13 +74,57 @@ mongoose.connect(url)
         var tempIsbn=req.body.Isbn;
         var tempAcNo=req.body.AcNo;
         var tempselfLink=req.body.selfLink;
-        var newBook;
+       
             axios.get(tempselfLink)
                 .then(response => {
                     // console.log(response.data.url);
-                    console.log(response.json);
+                   // console.log(response.json);
                      // newBook = new Books(response.json);
                      // newBook.save()
+                    //  var temp=response.json();
+                    //  const newBook=new Books({
+                    //     kind:temp.kind,
+                    //     id: temp.id,
+                    //     etag: temp.etag,
+                    //     selfLink: temp.selfLink,
+                    //         volumeInfo.title: temp.volumeInfo.title,
+                    //         volumeInfo.authors:temp.volumeInfo.authors ,
+                    //         volumeInfo.publisher:temp.volumeInfo.publisher ,
+                    //         volumeInfo.publishedDate: temp.volumeInfo.publishedDate,
+                    //         volumeInfo.description: temp.volumeInfo.description,
+                    //         volumeInfo.industryIdentifiers: temp.volumeInfo.industryIdentifiers,
+                    //         volumeInfo.readingModes.text: temp.volumeInfo.readingModes.text,
+                    //         volumeInfo.readingModes.image:  temp.volumeInfo.readingModes.image,
+                    //         volumeInfo.pageCount:temp.volumeInfo.pageCount ,
+                    //         volumeInfo.printType:temp.volumeInfo.printType,
+                    //         volumeInfo.categories: temp.volumeInfo.categories,
+                    //         volumeInfo.averageRating: temp.volumeInfo.averageRating,
+                    //         volumeInfo.ratingsCount: temp.volumeInfo.ratingsCount,
+                    //         volumeInfo.maturityRating: temp.volumeInfo.maturityRating,
+                    //         volumeInfo.allowAnonLogging: temp.volumeInfo.allowAnonLogging,
+                    //         volumeInfo.contentVersion: temp.volumeInfo.contentVersion,
+                    //         volumeInfo.imageLinks.smallThumbnail:temp.volumeInfo.imageLinks.smallThumbnail ,
+                    //         volumeInfo.imageLinks.thumbnail:temp.volumeInfo.imageLinks.thumbnail  ,
+                    //         volumeInfo.language: temp.volumeInfo.language,
+                    //         volumeInfo.previewLink: temp.volumeInfo.previewLink,
+                    //         volumeInfo.infoLink: temp.volumeInfo.infoLink,
+                    //         volumeInfo.canonicalVolumeLink: temp.volumeInfo.canonicalVolumeLink,
+                    //     saleInfo.country: temp.saleInfo.country,
+                    //     saleInfo.saleability:temp.saleInfo.saleability,
+                    //     saleInfo.isEbook: temp.saleInfo.isEbook,
+                    //     accessInfo.country: temp.accessInfo.country,
+                    //     accessInfo.viewability:temp.accessInfo.viewability ,
+                    //     accessInfo.embeddable:temp.accessInfo.embeddable,
+                    //     accessInfo.publicDomain: temp.accessInfo.publicDomain,
+                    //     accessInfo.textToSpeechPermission: temp.accessInfo.textToSpeechPermission,
+                    //     accessInfo.epub.isAvailable: temp.accessInfo.epub.isAvailable,
+                    //     accessInfo.pdf.isAvailable: temp.accessInfo.pdf.isAvailable,
+                    //     accessInfo.webReaderLink: temp.accessInfo.webReaderLink,
+                    //     accessInfo.accessViewStatus: temp.accessInfo.accessViewStatus,
+                    //     accessInfo.quoteSharingAllowed: temp.accessInfo.quoteSharingAllowed,
+                    //     searchInfo.textSnippet: temp.searchInfo.textSnippet
+                        
+                    //});
                      })
                   .catch(error => {
                    console.log(error);
@@ -93,6 +137,22 @@ mongoose.connect(url)
         res.send("All Done");
 
     });
+    async function createBook(){
+        const Book=new BookDb({
+            ISBN : "898456",
+            Title :" bunksheet",
+            Author : "nitin",
+            Publisher : "amey",
+            Image : "kwrgrgar",
+            FA : "no",
+            Count : 10,
+            AC :8500,
+            desc : "lsajgmal;eg, amgl",
+            pc : 10
+        });
+        const result= await Book.save();
+        console.log(result);
+    }
 
 
 
@@ -130,22 +190,7 @@ const bookSchema=new mongoose.Schema({
 
 const BookDb = mongoose.model('BookDb', bookSchema);
 
-async function createBook(){
-    const Book=new BookDb({
-        ISBN : "898456",
-        Title :" bunksheet",
-        Author : "nitin",
-        Publisher : "amey",
-        Image : "kwrgrgar",
-        FA : "no",
-        Count : 10,
-        AC :8500,
-        desc : "lsajgmal;eg, amgl",
-        pc : 10
-    });
-    const result= await Book.save();
-    console.log(result);
-}
+
 // for(var i = 0; i < 100;i++){
 // createBook();
 // }
