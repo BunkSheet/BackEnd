@@ -5,6 +5,7 @@ mongoose.Promise = global.Promise;
 var Book  = mongoose.model('Book',{
     data: {
         type: JSON,
+        unique : true,
 
       }
 
