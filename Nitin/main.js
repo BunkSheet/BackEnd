@@ -82,7 +82,7 @@ mongoose.connect(url)
 
         request(tempselfLink, function (error, response, body) {
                var data = JSON.parse(body);
-               newBook = new Book(data);
+               newBook = new Book({data});
                newBook.save();
             });
 
