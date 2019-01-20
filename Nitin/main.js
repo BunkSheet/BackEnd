@@ -79,17 +79,23 @@ mongoose.connect(url)
         var tempIsbn=req.body.Isbn;
         var tempAcNo=req.body.AcNo;
         var tempselfLink=req.body.selfLink;
-       
-            axios.get(tempselfLink)
-                .then(response => {
-                    console.log(response.json);
-                    newBook = new Book({data:response.json});
-                    newBook.save();
-                      async function createBook(){
-                     const result= await newBook.save();
-                     console.log(result);
-                                                    }
-                     createBook();
+
+        request(url, function (error, response, body) {
+               var data = JSON.parse(body);
+               newBook = new Book({data:data});
+               newBook.save();
+            });
+
+            // axios.get(tempselfLink)
+            //     .then(response => {
+            //         console.log(response.json);
+            //         newBook = new Book({data:response.json});
+            //         newBook.save();
+            //           async function createBook(){
+            //          const result= await newBook.save();
+            //          console.log(result);
+            //                                         }
+            //          createBook();
                     // console.log(response.data.url);
                    // console.log(response.json);
                      // newBook = new Books(response.json);
@@ -136,12 +142,12 @@ mongoose.connect(url)
                     //     accessInfo.accessViewStatus: temp.accessInfo.accessViewStatus,
                     //     accessInfo.quoteSharingAllowed: temp.accessInfo.quoteSharingAllowed,
                     //     searchInfo.textSnippet: temp.searchInfo.textSnippet
-                        
+
                     //});
-                     })
-                  .catch(error => {
-                   console.log(error);
-                    });
+                     // })
+                  // .catch(error => {
+                  //  console.log(error);
+                  //   });
             // async function createBook(){
             // const result= await newBook.save();
             // console.log(result);
