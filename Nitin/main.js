@@ -2,6 +2,7 @@ const mongoose =require('mongoose');
 var mongodb = require('mongodb');
 //const {Books}  = require(process.cwd() + '/models/books');
 const {Book}  = require(process.cwd() + '/models/booksDetails');
+const { Backup }  = require(process.cwd() + '/models/backupDb');
 //const Books = require(process.cwd() + '/models/books');
 var request = require('request');
 const bodyParser = require('body-parser');
@@ -79,7 +80,8 @@ mongoose.connect(url)
         var tempIsbn=req.body.Isbn;
         var tempAcNo=req.body.AcNo;
         var tempselfLink=req.body.selfLink;
-
+        var backup= new Backup({Isbn:tempIsbn,AcNo:tempAcNo});
+            backup.save();
         request(tempselfLink, function (error, response, body) {
                var data = JSON.parse(body);
                //console.log(data);
