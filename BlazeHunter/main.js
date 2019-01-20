@@ -20,7 +20,7 @@ const {Notice}  = require(process.cwd() + '/models/notices');
 
 const storage = multer.diskStorage({    //cb is callback
     destination:function(req,file,cb){
-      cb(null,'public');
+      cb(null,'public/noticeImages');
     },
     filename:function(req,file,cb){
       cb(null,new Date().toISOString()+"-"+file.originalname);
@@ -82,14 +82,14 @@ module.exports = function(app){
             //display(notices);
         },(err)=>{
             console.log(err);
-            
+
         });
         await Notice.find().count().then((counts)=>{
             console.log(counts);
             count = counts;
         },(err)=>{
             console.log(err);
-            
+
         });
         console.log(notices);
         var notinfo = {
@@ -102,27 +102,27 @@ module.exports = function(app){
 
     app.post(alias + '/removenotice',(req,res)=>{
        // var rid = req.params.Id;
-       
+
         var rid = parseInt(req.body.Id);
         //console.log(_.isString(rid));
         //res.send(JSON.stringify({rid}));
-        
+
 
         Notice.findOneAndRemove({Id:rid}).then((doc)=>{
             //console.log(doc.noticeimage);
             var rm = process.cwd()+"/"+doc.noticeimage;
             console.log(rm);
-            
+
             fs.unlink(rm,function(err){
                 if(err) return console.log(err);
                 console.log('file deleted successfully');
-           }); 
+           });
             res.send(doc);
         },(err)=>{
             console.log(err);
-            
+
         });
-        
+
     });
 
     function sendNoticeToUser(notice){
