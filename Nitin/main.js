@@ -1,5 +1,6 @@
 const mongoose =require('mongoose');
 var mongodb = require('mongodb');
+const bodyParser = require('body-parser');
 var alias = '/nd';
 // root url https://mighty-hollows-23016.herokuapp.com/
 module.exports = function(app){
@@ -53,21 +54,20 @@ mongoose.connect('mongodb://localhost/LibraryDB')
     //       console.log(db);
     //     }
     //   });  
-    var Mongoose=require("mongoose");
-    var dbURI='mongodb://dbuser:Dbuser123@ds161134.mlab.com:61134/bunksheet';
-    Mongoose.connect(dbURI,function(err){    
-        if(err){
-        console.log('Some problem with the connection ' +err)   
-        } 
-        else {
-        console.log('The Mongoose connection is ready')  ;
-        var temp=books.find();
-        console.log(temp);
-        }
-    
-    })
+    var url = "mongodb://dbuser:Dbuser123@ds161134.mlab.com:61134/bunksheet";
+
+mongoose.connect(url)
+    .then((result)=>console.log(`Connected to mlab db`))
+    .catch((err)=>console.log(err));
+    // var db = mongoose.connection;
+    // var temp=db.books.find();
+    // console.log(temp);
+
+
 
     var title,body,imageLink,Id;
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
     app.post(alias+'/postNotifications',function(req,res){
         title=req.title;
         body=req.body;
