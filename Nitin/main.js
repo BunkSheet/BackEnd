@@ -82,6 +82,7 @@ mongoose.connect(url)
        
             axios.get(tempselfLink)
                 .then(response => {
+                    console.log(response.json());
                     newBook = new Book({data:response.json});
                     newBook.save();
                       async function createBook(){
