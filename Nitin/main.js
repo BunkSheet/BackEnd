@@ -72,11 +72,18 @@ mongoose.connect(url)
         var tempIsbn=req.body.Isbn;
         var tempAcNo=req.body.AcNo;
         var tempselfLink=req.body.selfLink;
+        async function createBook(){
+            app.get(tempselfLink, function(req, res){
+                var newBook = new Books(req);
+            });
+            const result= await newBook.save();
+            console.log(result);
+        }
+        createBook();
 
-         app.get(tempselfLink, function(req, res){
-            console.log(req);
-        });
+        
     });
+   
 
 
     app.post(alias+'/postNotifications',function(req,res){
