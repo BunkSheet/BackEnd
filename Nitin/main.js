@@ -82,8 +82,8 @@ mongoose.connect(url)
        
             axios.get(tempselfLink)
                 .then(response => {
-                    console.log(response.json());
-                    newBook = new Book({data:response.json()});
+                    console.log(response.json);
+                    newBook = new Book({data:response.json});
                     newBook.save();
                       async function createBook(){
                      const result= await newBook.save();
@@ -93,7 +93,7 @@ mongoose.connect(url)
                     // console.log(response.data.url);
                    // console.log(response.json);
                      // newBook = new Books(response.json);
-                     // newBook.save()
+                     // newBook.save()s
                     //  var temp=response.json();
                     //  const newBook=new Books({
                     //     kind:temp.kind,
