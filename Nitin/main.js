@@ -69,13 +69,14 @@ mongoose.connect(url)
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
     app.post(alias + '/addBook',(req,res)=>{
-        var tempIsbn=req.Isbn;
-        var tempAcNo=req.AcNo;
-        var tempselfLink=req.selfLink;
+        var tempIsbn=req.body.Isbn;
+        var tempAcNo=req.body.AcNo;
+        var tempselfLink=req.body.selfLink;
 
-        // app.get(tempselfLink, function(req, res){
-        //    console.log(req);
-       // });
+         app.get(tempselfLink, function(req, res){
+            console.log(req);
+        });
+    });
 
 
     app.post(alias+'/postNotifications',function(req,res){
