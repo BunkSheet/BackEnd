@@ -75,7 +75,7 @@ module.exports = function(app){
 
     app.get(alias + '/getnotices' , async (req,res)=>{
         var notices,count;
-       await Notice.find({}).then((docs)=>{
+       await Notice.find({"flag":true}).then((docs)=>{
             //console.log(docs);
             //res.send({docs});
             notices = docs;
@@ -84,7 +84,7 @@ module.exports = function(app){
             console.log(err);
 
         });
-        await Notice.find().count().then((counts)=>{
+        await Notice.find({"flag":true}).count().then((counts)=>{
             console.log(counts);
             count = counts;
         },(err)=>{
@@ -108,15 +108,15 @@ module.exports = function(app){
         //res.send(JSON.stringify({rid}));
 
 
-        Notice.findOneAndRemove({Id:rid}).then((doc)=>{
+        Notice.findOneAndUpdate({Id:rid},{$set:{"flag":flase}}).then((doc)=>{
             //console.log(doc.noticeimage);
             var rm = process.cwd()+"/"+doc.noticeimage;
             console.log(rm);
 
-            fs.unlink(rm,function(err){
-                if(err) return console.log(err);
-                console.log('file deleted successfully');
-           });
+        //     fs.unlink(rm,function(err){
+        //         if(err) return console.log(err);
+        //         console.log('file deleted successfully');
+        //    });
             res.send(doc);
         },(err)=>{
             console.log(err);
