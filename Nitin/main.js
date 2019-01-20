@@ -1,6 +1,6 @@
 const mongoose =require('mongoose');
 var mongodb = require('mongodb');
-const {Books}  = require(process.cwd() + '/models/books');
+//const {Books}  = require(process.cwd() + '/models/books');
 const {Book}  = require(process.cwd() + '/models/booksDetails');
 //const Books = require(process.cwd() + '/models/books');
 var request = require('request');
@@ -82,7 +82,9 @@ mongoose.connect(url)
 
         request(tempselfLink, function (error, response, body) {
                var data = JSON.parse(body);
-               newBook = new Book({data});
+               //console.log(data);
+               newBook = new Book();
+               newBook.data = data;
                newBook.save();
             });
 
