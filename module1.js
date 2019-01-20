@@ -4,7 +4,7 @@ const express = require('express');
 
 var app = express();
 mongoose.connect('mongodb://localhost/LibraryDB')
-    .then(()=> console.log('connected'))
+    .then(()=> console.log('connected module1'))
     .catch(err=>console.error('err'))
 
 

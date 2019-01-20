@@ -5,10 +5,12 @@ const expoN = require(process.cwd() + '/notify.js');
 const bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 const {User}  = require(process.cwd() + '/models/user');
+// root url https://mighty-hollows-23016.herokuapp.com/
+
 var url = "mongodb://dbuser:Dbuser123@ds161134.mlab.com:61134/bunksheet";
 //var url = 'mongodb://localhost:27017/LibraryDB';
 mongoose.connect(url)
-    .then((result)=>console.log(`Connected to db`))
+    .then((result)=>console.log(`Connected to db Ayush`))
     .catch((err)=>console.log(err));
 
 const {Notice}  = require(process.cwd() + '/models/notices');
@@ -65,6 +67,49 @@ module.exports = function(app){
 
         })
 
+    });
+
+
+    app.get(alias + '/getnotices' , async (req,res)=>{
+        var notices,count;
+       await Notice.find({}).then((docs)=>{
+            //console.log(docs);
+            //res.send({docs});
+            notices = docs;
+            //display(notices);
+        },(err)=>{
+            console.log(err);
+            
+        });
+        await Notice.find().count().then((counts)=>{
+            console.log(counts);
+            count = counts;
+        },(err)=>{
+            console.log(err);
+            
+        });
+        console.log(notices);
+        var notinfo = {
+            notices:notices,
+            activecount:count
+        }
+        res.send(notinfo);
+
+    });
+
+    app.get(alias + '/removenotice/:Id',(req,res)=>{
+        var rid = req.params.Id;
+        console.log(rid);
+        
+
+        Notice.findOneAndRemove({Id:rid}).then((doc)=>{
+            console.log(doc);
+            //res.send(doc);
+        },(err)=>{
+            console.log(err);
+            
+        });
+        
     });
 
     function sendNoticeToUser(notice){

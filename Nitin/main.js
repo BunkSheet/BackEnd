@@ -54,12 +54,12 @@ mongoose.connect('mongodb://localhost/LibraryDB')
     //       console.log(db);
     //     }
     //   });  
-    var url = "mongodb://dbuser:Dbuser123@ds161134.mlab.com:61134/bunksheet";
+var url = "mongodb://dbuser:Dbuser123@ds161134.mlab.com:61134/bunksheet";
 
 mongoose.connect(url)
     .then((result)=>console.log(`Connected to mlab db`))
     .catch((err)=>console.log(err));
-    // var db = mongoose.connection;
+    var db = mongoose.connection;
     // var temp=db.books.find();
     // console.log(temp);
 

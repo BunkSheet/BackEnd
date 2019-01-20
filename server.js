@@ -8,8 +8,9 @@ app.get('/', function (req, res) {
     res.render('maintenance');
 });
 require('./CraftyClown/main')(app);
-require('./BlazeHunter/main')(app);
 require('./Nitin/main')(app);
+require('./BlazeHunter/main')(app);
+
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 //socket area
