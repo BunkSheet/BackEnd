@@ -19,6 +19,9 @@ var Notice  = mongoose.model('Notice',{
   Id:{
     type:Number
   },
+ flag:{
+    type:Boolean
+  },
   timestamp:{
       type:Date
   }
