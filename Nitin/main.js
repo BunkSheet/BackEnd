@@ -77,8 +77,8 @@ mongoose.connect(url)
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
     app.post(alias + '/addBook',(req,res)=>{
-        var tempIsbn=req.body.Isbn;
-        var tempAcNo=req.body.AcNo;
+        var tempIsbn=req.body.ISBN;
+        var tempAcNo=req.body.ACNO;
         var tempselfLink=req.body.selfLink;
         var backup= new Backup({ISBN:tempIsbn,ACNO:tempAcNo,SELFLINK:tempselfLink});
             backup.save();
