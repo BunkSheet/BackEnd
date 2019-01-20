@@ -11,7 +11,6 @@ var Backup  = mongoose.model('Backup',{
       },
       ACNO:{
         type:String,
-        unique : true,
         required:true, //text is required
         minlength:1,
         trim: true    //removes whitespaces from start and end
