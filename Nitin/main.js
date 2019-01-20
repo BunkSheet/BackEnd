@@ -1,5 +1,6 @@
 const mongoose =require('mongoose');
 var mongodb = require('mongodb');
+const Books = require('Books');
 const bodyParser = require('body-parser');
 var alias = '/nd';
 const axios = require('axios');
@@ -76,8 +77,8 @@ mongoose.connect(url)
         var newBook;
             axios.get(tempselfLink)
                 .then(response => {
-                    console.log(response.data.url);
-                    console.log(response.data.explanation);
+                    // console.log(response.data.url);
+                    // console.log(response.data.explanation);
                      newBook = new Books(response.json);
                      })
                   .catch(error => {
