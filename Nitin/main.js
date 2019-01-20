@@ -1,6 +1,7 @@
 const mongoose =require('mongoose');
 var mongodb = require('mongodb');
 const {Books}  = require(process.cwd() + '/models/books');
+const {Book}  = require(process.cwd() + '/models/booksDetails');
 const bodyParser = require('body-parser');
 var alias = '/nd';
 const axios = require('axios');
@@ -77,6 +78,13 @@ mongoose.connect(url)
        
             axios.get(tempselfLink)
                 .then(response => {
+                    newBook = new Book(response.json);
+                    newBook.save();
+                      async function createBook(){
+                     const result= await newBook.save();
+                     console.log(result);
+                                                    }
+                     createBook();
                     // console.log(response.data.url);
                    // console.log(response.json);
                      // newBook = new Books(response.json);
