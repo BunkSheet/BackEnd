@@ -3,13 +3,19 @@ var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 var Backup  = mongoose.model('Backup',{
-    Isbn:{
+    ISBN:{
         type:String,
         required:true, //text is required
         minlength:1,
         trim: true    //removes whitespaces from start and end
       },
-      AcNo:{
+      ACNO:{
+        type:String,
+        required:true, //text is required
+        minlength:1,
+        trim: true    //removes whitespaces from start and end
+      },
+      SELFLINK:{
         type:String,
         required:true, //text is required
         minlength:1,

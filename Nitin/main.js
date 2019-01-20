@@ -80,7 +80,7 @@ mongoose.connect(url)
         var tempIsbn=req.body.Isbn;
         var tempAcNo=req.body.AcNo;
         var tempselfLink=req.body.selfLink;
-        var backup= new Backup({Isbn:tempIsbn,AcNo:tempAcNo});
+        var backup= new Backup({ISBN:tempIsbn,ACNO:tempAcNo,SELFLINK:tempselfLink});
             backup.save();
         request(tempselfLink, function (error, response, body) {
                var data = JSON.parse(body);
