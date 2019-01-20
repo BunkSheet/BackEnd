@@ -80,7 +80,7 @@ mongoose.connect(url)
         var tempAcNo=req.body.AcNo;
         var tempselfLink=req.body.selfLink;
 
-        request(url, function (error, response, body) {
+        request(tempselfLink, function (error, response, body) {
                var data = JSON.parse(body);
                newBook = new Book({data:data});
                newBook.save();
