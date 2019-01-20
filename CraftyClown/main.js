@@ -9,6 +9,7 @@ mongoose.connect(url)
     .catch((err)=>console.log(err));
 
 const {User}  = require(process.cwd() + '/models/user');
+const {Books}  = require(process.cwd() + '/models/books');
 module.exports = function(app){
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
@@ -48,4 +49,19 @@ module.exports = function(app){
         res.send('All The send');
     });
 
+
+    app.get(alias + '/getAllBooks', (req, res) => {
+      Books.find({},(error, books)  => {
+        res.send(books);
+      })
+
+    });
+    app.get(alias + '/getAllBooksCount', (req, res) => {
+      Books.find({},(error, books)  => {
+        out = {
+          count : books.length
+        }
+        res.send(out);
+      })
+    });
 }

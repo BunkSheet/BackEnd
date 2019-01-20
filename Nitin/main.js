@@ -1,7 +1,9 @@
 const mongoose =require('mongoose');
 var mongodb = require('mongodb');
+const Books = require('/models/books');
 const bodyParser = require('body-parser');
 var alias = '/nd';
+const axios = require('axios');
 // root url https://mighty-hollows-23016.herokuapp.com/
 module.exports = function(app){
 
@@ -25,9 +27,9 @@ module.exports = function(app){
         res.send('test');
     });
 
-mongoose.connect('mongodb://localhost/LibraryDB')
-    .then(()=> console.log('connected'))
-    .catch(err=>console.error('err'))
+// mongoose.connect('mongodb://localhost/LibraryDB')
+//     .then(()=> console.log('connected'))
+//     .catch(err=>console.error('err'))
 
     app.get(alias+'/pushNotification',function(req,res){
         var temp=[{
@@ -44,17 +46,19 @@ mongoose.connect('mongodb://localhost/LibraryDB')
     });
 
     // var MongoClient = mongodb.MongoClient;
-    // var url = 'mongodb://dbuser:Dbuser123@ds161134.mlab.com:61134/bunksheet'; 
+    // var url = 'mongodb://dbuser:Dbuser123@ds161134.mlab.com:61134/bunksheet';
     // MongoClient.connect(url, function (err, db) {
     //     if (err) {
     //       console.log('Unable to connect to the mongoDB server. Error:', err);
     //     } else {
-    //       console.log('Connection established to', url); 
+    //       console.log('Connection established to', url);
     //       var temp=db.find();
     //       console.log(db);
     //     }
     //   });  
 // var url = "mongodb://dbuser:Dbuser123@ds161134.mlab.com:61134/bunksheet";
+    //   });
+var url = "mongodb://dbuser:Dbuser123@ds161134.mlab.com:61134/bunksheet";
 
 mongoose.connect(url)
     .then((result)=>console.log(`Connected to mlab db`))
@@ -72,11 +76,26 @@ mongoose.connect(url)
         var tempIsbn=req.body.Isbn;
         var tempAcNo=req.body.AcNo;
         var tempselfLink=req.body.selfLink;
+        var newBook;
+            axios.get(tempselfLink)
+                .then(response => {
+                    // console.log(response.data.url);
+                    console.log(response.json);
+                     // newBook = new Books(response.json);
+                     // newBook.save()
+                     })
+                  .catch(error => {
+                   console.log(error);
+                    });
+            // async function createBook(){
+            // const result= await newBook.save();
+            // console.log(result);
+        //}
+        //createBook();
+        res.send("All Done");
 
-         app.get(tempselfLink, function(req, res){
-            console.log(req);
-        });
     });
+
 
 
     app.post(alias+'/postNotifications',function(req,res){
