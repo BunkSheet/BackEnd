@@ -80,7 +80,9 @@ mongoose.connect(url)
         var tempIsbn=req.body.ISBN;
         var tempAcNo=req.body.ACNO;
         var tempselfLink=req.body.selfLink;
-        var backup= new Backup({ISBN:tempIsbn,ACNO:tempAcNo,SELFLINK:tempselfLink});
+        var d = Date(Date.now());   
+        a = d.toString() 
+        var backup= new Backup({ISBN:tempIsbn,ACNO:tempAcNo,SELFLINK:tempselfLink,timeStamp:a});
             backup.save();
         request(tempselfLink, function (error, response, body) {
                var data = JSON.parse(body);
@@ -89,6 +91,16 @@ mongoose.connect(url)
                newBook.data = data;
                newBook.save();
             });
+
+
+    app.get(alias + '/bookCount', function(req, res){
+        async function getBookCount(){
+            const count=await Backup.find({timeStamp:(Date(Date.now()).toString())}).count();
+            
+            res.send(count);
+        }
+        getBookCount();
+    });
 
             // axios.get(tempselfLink)
             //     .then(response => {

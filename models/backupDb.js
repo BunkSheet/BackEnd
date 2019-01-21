@@ -22,6 +22,12 @@ var Backup  = mongoose.model('Backup',{
         minlength:1,
         trim: true    //removes whitespaces from start and end
       },
+      timeStamp:{
+        type:String,
+        required:true, //text is required
+        minlength:1,
+        trim: true    //removes whitespaces from start and end
+      },
 
 });
 
