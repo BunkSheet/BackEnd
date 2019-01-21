@@ -80,9 +80,12 @@ mongoose.connect(url)
         var tempIsbn=req.body.ISBN;
         var tempAcNo=req.body.ACNO;
         var tempselfLink=req.body.selfLink;
-        var d = Date(Date.now());   
-        a = d.toString() 
-        var backup= new Backup({ISBN:tempIsbn,ACNO:tempAcNo,SELFLINK:tempselfLink,timeStamp:a});
+        var dateObj = new Date(Date.now());
+        var month = dateObj.getUTCMonth() + 1; //months from 1-12
+        var day = dateObj.getUTCDate();
+        var year = dateObj.getUTCFullYear();
+        newdate = year + "/" + month + "/" + day;
+        var backup= new Backup({ISBN:tempIsbn,ACNO:tempAcNo,SELFLINK:tempselfLink,timeStamp:newdate});
             backup.save();
         request(tempselfLink, function (error, response, body) {
                var data = JSON.parse(body);
@@ -95,7 +98,12 @@ mongoose.connect(url)
 
     app.get(alias + '/bookCount', function(req, res){
         async function getBookCount(){
-            const count=await Backup.find({timeStamp:(Date(Date.now()).toString())}).count();
+            var dateObj = new Date(Date.now());
+            var month = dateObj.getUTCMonth() + 1; //months from 1-12
+            var day = dateObj.getUTCDate();
+            var year = dateObj.getUTCFullYear();
+        newdate = year + "/" + month + "/" + day;
+            const count=await Backup.find({timeStamp:newdate}).count();
             
             res.send(count);
         }
