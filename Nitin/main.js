@@ -80,7 +80,7 @@ mongoose.connect(url)
         var tempIsbn=req.body.ISBN;
         var tempAcNo=req.body.ACNO;
         var tempselfLink=req.body.selfLink;
-        var dateObj = new Date(Date.now());
+        var dateObj = new Date();
         var month = dateObj.getUTCMonth() + 1; //months from 1-12
         var day = dateObj.getUTCDate();
         var year = dateObj.getUTCFullYear();
@@ -98,7 +98,7 @@ mongoose.connect(url)
 
     app.get(alias + '/bookCount', function(req, res){
         async function getBookCount(){
-            var dateObj = new Date(Date.now());
+            var dateObj = new Date();
             var month = dateObj.getUTCMonth() + 1; //months from 1-12
             var day = dateObj.getUTCDate();
             var year = dateObj.getUTCFullYear();
