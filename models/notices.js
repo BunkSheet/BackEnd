@@ -14,16 +14,18 @@ var Notice  = mongoose.model('Notice',{
     required:true
   },
   noticeimage:{
-    type:String
+    type:String,
+    default:"default"
     },
   Id:{
     type:Number
   },
  flag:{
-    type:Boolean
+    type:Boolean,
+    default:true
   },
   timestamp:{
-      type:Date
+      type:String
   }
 });
 

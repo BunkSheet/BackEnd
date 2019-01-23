@@ -52,7 +52,7 @@ module.exports = function(app){
             nbody:req.body.nbody,
             noticeimage:req.file.path,
             Id:req.body.Id,
-            timestamp:new Date().valueOf()
+            timestamp:new Date().toLocaleString()
         });
         console.log(newnotice);
         notice = {
@@ -108,7 +108,7 @@ module.exports = function(app){
         //res.send(JSON.stringify({rid}));
 
 
-        Notice.findOneAndUpdate({Id:rid},{$set:{"flag":flase}}).then((doc)=>{
+        Notice.findOneAndUpdate({Id:rid},{$set:{"flag":false}}).then((doc)=>{
             //console.log(doc.noticeimage);
             var rm = process.cwd()+"/"+doc.noticeimage;
             console.log(rm);
