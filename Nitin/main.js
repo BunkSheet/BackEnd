@@ -1,7 +1,7 @@
 const mongoose =require('mongoose');
 var mongodb = require('mongodb');
 //const {Books}  = require(process.cwd() + '/models/books');
-const {Book}  = require(process.cwd() + '/models/booksDetails');
+const Book  = require(process.cwd() + '/models/booksDetails');
 const { Backup }  = require(process.cwd() + '/models/backupDb');
 //const Books = require(process.cwd() + '/models/books');
 var request = require('request');
@@ -108,6 +108,15 @@ mongoose.connect(url)
             res.send(count);
         }
         getBookCount();
+    });
+    app.get(alias + '/listBooks', (req, res) => {
+        async function getBooks(){
+            const book=await Book.find().limit(10);
+            console.log(book);
+            res.send(book);
+        }
+        getBooks();
+    
     });
 
             // axios.get(tempselfLink)
@@ -244,17 +253,7 @@ const BookDb = mongoose.model('BookDb', bookSchema);
 // }
 // getBooks();
 
-app.get('/listBooks', (req, res) => {
-    async function getBooks(){
-        const books=await BookDb.find().limit(10);
-        console.log(books);
-        res.send(books, () => {
-            console.log(' ');
-          })
-    }
-    getBooks();
 
-});
 
 
 
