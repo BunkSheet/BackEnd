@@ -46,11 +46,13 @@ module.exports = function(app){
 
     app.post(alias + '/addnotice' ,upload.single('noticeimage'),(req,res)=>{
         console.log(req.file);
-
+        var p="default";
+        if(req.file !== undefined)
+          p=req.file.path;
         var newnotice = new Notice({
             title:req.body.title,
             nbody:req.body.nbody,
-            noticeimage:req.file.path,
+            noticeimage:p,
             Id:req.body.Id,
             timestamp:new Date().toLocaleString()
         });
