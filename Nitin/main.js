@@ -1,7 +1,7 @@
 const mongoose =require('mongoose');
 var mongodb = require('mongodb');
 //const {Books}  = require(process.cwd() + '/models/books');
-const Book  = require(process.cwd() + '/models/booksDetails');
+const {Book}  = require(process.cwd() + '/models/booksDetails');
 const { Backup }  = require(process.cwd() + '/models/backupDb');
 //const Books = require(process.cwd() + '/models/books');
 var request = require('request');
@@ -94,30 +94,38 @@ mongoose.connect(url)
                newBook.data = data;
                newBook.save();
             });
+            res.send("All Done");
+
+        });
 
 
-    app.get(alias + '/bookCount', (req, res)=>{
-        async function getBookCount(){
-            var dateObj = new Date();
-            var month = dateObj.getUTCMonth() + 1; //months from 1-12
-            var day = dateObj.getUTCDate();
-            var year = dateObj.getUTCFullYear();
-        newdate = year + "/" + month + "/" + day;
-            const count=await Backup.find({timeStamp:newdate}).count();
-            
-            res.send(count);
-        }
-        getBookCount();
-    });
-    app.get(alias + '/listBooks', (req, res) => {
-        async function getBooks(){
-            const book=await Book.find();
-            console.log(book);
-            res.send(book);
-        }
-        getBooks();
+        app.get(alias + '/bookCount', (req, res)=>{
+            async function getBookCount(){
+                var dateObj = new Date();
+                var month = dateObj.getUTCMonth() + 1; //months from 1-12
+                var day = dateObj.getUTCDate();
+                var year = dateObj.getUTCFullYear();
+            newdate = year + "/" + month + "/" + day;
+                const count=await Backup.count({timeStamp:newdate}, function( err, count){
+                console.log( "Number of users:", count );
+                res.send(count);
+                                                
+            });
+                
+               
+            }
+            getBookCount();
+        });
+        app.get(alias + '/listBooks', (req, res) => {
+            async function getBooks(){
+                const book=await Book.find();
+                console.log(book);
+                res.send(book);
+            }
+            getBooks();
+        
+        });
     
-    });
 
             // axios.get(tempselfLink)
             //     .then(response => {
@@ -186,9 +194,7 @@ mongoose.connect(url)
             // console.log(result);
         //}
         //createBook();
-        res.send("All Done");
-
-    });
+   
     async function createBook(){
         const Book=new BookDb({
             ISBN : "898456",
