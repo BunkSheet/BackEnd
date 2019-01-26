@@ -96,7 +96,7 @@ mongoose.connect(url)
             });
 
 
-    app.get(alias + '/bookCount', function(req, res){
+    app.get(alias + '/bookCount', (req, res)=>{
         async function getBookCount(){
             var dateObj = new Date();
             var month = dateObj.getUTCMonth() + 1; //months from 1-12
@@ -111,7 +111,7 @@ mongoose.connect(url)
     });
     app.get(alias + '/listBooks', (req, res) => {
         async function getBooks(){
-            const book=await Book.find().limit(10);
+            const book=await Book.find();
             console.log(book);
             res.send(book);
         }
